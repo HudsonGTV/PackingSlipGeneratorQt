@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-6bc44e35262498223702.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "PackingSlipGenerator",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "PackingSlipGenerator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PackingSlipGenerator-Debug-eb074cdfa88ce5d58d5f.json",
+					"name" : "PackingSlipGenerator",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "PackingSlipGenerator_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PackingSlipGenerator_autogen-Debug-1cc15a02ef6ddbeff7f6.json",
+					"name" : "PackingSlipGenerator_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "PackingSlipGenerator_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PackingSlipGenerator_autogen_timestamp_deps-Debug-b690bec30837f71d3ee2.json",
+					"name" : "PackingSlipGenerator_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "E:/dev/Qt/PackingSlipGenerator/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
+		"source" : "E:/dev/Qt/PackingSlipGenerator"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
