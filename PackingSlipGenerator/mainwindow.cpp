@@ -13,7 +13,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
+
+    // Set date field to current date
+    ui->dateEdit->setDate(QDate::currentDate());
+
 }
 
 MainWindow::~MainWindow() {
@@ -22,7 +27,25 @@ MainWindow::~MainWindow() {
     //delete m_company;
 }
 
+void MainWindow::refreshCompanyData() {
 
+    // Check if no company data present
+    if(!m_company) {
+        ui->label_companyData->setText("Please Import Company Data");
+        return;
+    }
+
+    QString buffer = "                                                  PACKING LIST\n";
+
+    Address addr = m_company->address;
+    buffer += m_company->getName() + "\n";
+    buffer += addr.street.toUpper() + "\n";
+    buffer += addr.city.toUpper() + ", " + addr.stateCode + " " + addr.zipCode + "\n";
+    buffer += "TEL: " + m_company->getTelephone() + "\n";
+    buffer += "WWW: " + m_company->getWebsite();
+
+    ui->label_companyData->setText(buffer);
+}
 
 /**
  * Called when user wants to create a company data file - should prompt user for info on company
@@ -69,6 +92,8 @@ void MainWindow::on_actionExport_Company_Data_triggered() {
         qDebug() << "Address:\n" << m_company->address.street;
         qDebug() << m_company->address.city << ", " << m_company->address.stateCode << m_company->address.zipCode;
         qDebug() << m_company->address.country;
+
+        refreshCompanyData();
 
     }
 

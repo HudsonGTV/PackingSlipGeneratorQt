@@ -1,23 +1,8 @@
 #include <QIntValidator>
+#include <QMessageBox>
 
 #include "companyinfodialog.h"
 #include "ui_companyinfodialog.h"
-
-/**
- * @brief validateData - ensures that data is filled in correctly
- * @param company - company object that holds data
- * @return true if data is valid; false if invalid
- */
-bool validateData(EntityCompany *company) {
-
-    // return if we don't have an object to put data into
-    if(!company) return false;
-
-    //
-
-    return true;
-
-}
 
 CompanyInfoDialog::CompanyInfoDialog(QWidget *parent, EntityCompany *company)
     : QDialog(parent)
@@ -44,6 +29,73 @@ CompanyInfoDialog::~CompanyInfoDialog() {
     delete ui;
 }
 
+// helper func for CompanyInfoDialog::validateData(...)
+bool validateDataInvalidField(QString &errorBuffer, QString errorMsg) {
+    errorBuffer += "- " + errorMsg + '\n';
+    return true;
+}
+
+/**
+ * @brief validateData - ensures that data is filled in correctly
+ * @param company - company object that holds data
+ * @return true if data is valid; false if invalid
+ */
+bool CompanyInfoDialog::validateData(EntityCompany *company, bool dialogOnInvalid) {
+
+    // return if we don't have an object to put data into
+    if(!company) return false;
+
+    bool invalidFieldFound = false;
+
+    /* check all fields for invalid stuff */
+    QString errorBuff = "";
+
+    // company name
+    if(company->getName().length() == 0)
+        invalidFieldFound = validateDataInvalidField(errorBuff, "Missing company name");
+
+    // telephone
+    if(
+        ui->lineEdit_companyTeleArea->text().length() < 3 ||
+        ui->lineEdit_companyTelePrefix->text().length() < 3 ||
+        ui->lineEdit_companyTeleNumber->text().length() < 4
+    )
+        invalidFieldFound = validateDataInvalidField(errorBuff, "Missing/invalid telephone number");
+
+    // website
+    if(company->getWebsite().length() == 0)
+        invalidFieldFound = validateDataInvalidField(errorBuff, "Missing website URL");
+
+    // address: street
+    if(company->address.street.length() == 0)
+        invalidFieldFound = validateDataInvalidField(errorBuff, "Missing street address");
+
+    // address: city
+    if(company->address.city.length() == 0)
+        invalidFieldFound = validateDataInvalidField(errorBuff, "Missing city in address");
+
+    // address: state code
+    if(company->address.stateCode.length() != 2)
+        invalidFieldFound = validateDataInvalidField(errorBuff, "Missing/invalid state code in address");
+
+    // address: zip code
+    if(company->address.zipCode.length() == 0)
+        invalidFieldFound = validateDataInvalidField(errorBuff, "Missing zip code in address");
+
+    // address: country
+    if(company->address.country.length() == 0)
+        invalidFieldFound = validateDataInvalidField(errorBuff, "Missing country in address");
+
+    /* END FIELD CHECK */
+
+    // check if user wants dialog of errors
+    if(dialogOnInvalid && invalidFieldFound)
+        QMessageBox::warning(this, "Invalid Fields", "There were issues with the following fields:\n" + errorBuff);
+
+    return !invalidFieldFound;
+
+}
+
 void CompanyInfoDialog::displayError(QString error) {
     qDebug() << "Error: " << error;
 }
@@ -58,10 +110,11 @@ bool CompanyInfoDialog::isSubmitted() {
 void CompanyInfoDialog::accept() {
 
     // return if we don't have an object to put data into
-    if(!m_companyRef) return displayError("Internal error. Could not create company data object.");
+    if(!m_companyRef)
+        return displayError("Internal error. Could not create company data object.");
 
     // call original base function if fields are valid
-    if(validateData(m_companyRef)) {
+    if(validateData(m_companyRef, true)) {
         // mark form as submitted
         m_formSubmitted = true;
         // default behavior from here

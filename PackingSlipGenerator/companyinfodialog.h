@@ -21,6 +21,7 @@ public:
     explicit CompanyInfoDialog(QWidget *parent = nullptr, EntityCompany *company = nullptr);
     ~CompanyInfoDialog();
 
+    bool validateData(EntityCompany *company, bool dialogOnInvalid = false);
     void displayError(QString error);
 
     bool isSubmitted();

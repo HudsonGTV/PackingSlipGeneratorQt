@@ -29,11 +29,11 @@ public:
     QDialogButtonBox *buttonBox;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *companyName;
-    QLabel *label;
+    QLabel *label_cName;
     QLineEdit *lineEdit_companyName;
     QWidget *horizontalLayoutWidget_2;
     QHBoxLayout *telephone;
-    QLabel *label_2;
+    QLabel *label_number;
     QLabel *label_5;
     QLineEdit *lineEdit_companyTeleArea;
     QLabel *label_4;
@@ -42,25 +42,25 @@ public:
     QLineEdit *lineEdit_companyTeleNumber;
     QWidget *horizontalLayoutWidget_3;
     QHBoxLayout *website;
-    QLabel *label_6;
+    QLabel *label_url;
     QLineEdit *lineEdit_companyWebsite;
     QLabel *label_addr;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *street;
-    QLabel *label_8;
+    QLabel *label_street;
     QLineEdit *lineEdit_companyAddrStreet;
     QWidget *gridLayoutWidget;
     QGridLayout *cityState;
-    QLabel *label_9;
+    QLabel *label_city;
     QLineEdit *lineEdit_companyAddrCity;
-    QLabel *label_10;
+    QLabel *label_state;
     QLineEdit *lineEdit_companyAddrState;
     QWidget *gridLayoutWidget_2;
     QGridLayout *zipCountry;
     QLineEdit *lineEdit_companyAddrZip;
     QLineEdit *lineEdit_companyAddrCountry;
-    QLabel *label_7;
-    QLabel *label_11;
+    QLabel *label_zip;
+    QLabel *label_country;
     QLabel *label_info;
 
     void setupUi(QDialog *CompanyInfoDialog)
@@ -86,10 +86,10 @@ public:
         companyName = new QHBoxLayout(horizontalLayoutWidget);
         companyName->setObjectName("companyName");
         companyName->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(horizontalLayoutWidget);
-        label->setObjectName("label");
+        label_cName = new QLabel(horizontalLayoutWidget);
+        label_cName->setObjectName("label_cName");
 
-        companyName->addWidget(label);
+        companyName->addWidget(label_cName);
 
         lineEdit_companyName = new QLineEdit(horizontalLayoutWidget);
         lineEdit_companyName->setObjectName("lineEdit_companyName");
@@ -103,10 +103,10 @@ public:
         telephone = new QHBoxLayout(horizontalLayoutWidget_2);
         telephone->setObjectName("telephone");
         telephone->setContentsMargins(0, 0, 0, 0);
-        label_2 = new QLabel(horizontalLayoutWidget_2);
-        label_2->setObjectName("label_2");
+        label_number = new QLabel(horizontalLayoutWidget_2);
+        label_number->setObjectName("label_number");
 
-        telephone->addWidget(label_2);
+        telephone->addWidget(label_number);
 
         label_5 = new QLabel(horizontalLayoutWidget_2);
         label_5->setObjectName("label_5");
@@ -147,10 +147,10 @@ public:
         website = new QHBoxLayout(horizontalLayoutWidget_3);
         website->setObjectName("website");
         website->setContentsMargins(0, 0, 0, 0);
-        label_6 = new QLabel(horizontalLayoutWidget_3);
-        label_6->setObjectName("label_6");
+        label_url = new QLabel(horizontalLayoutWidget_3);
+        label_url->setObjectName("label_url");
 
-        website->addWidget(label_6);
+        website->addWidget(label_url);
 
         lineEdit_companyWebsite = new QLineEdit(horizontalLayoutWidget_3);
         lineEdit_companyWebsite->setObjectName("lineEdit_companyWebsite");
@@ -167,10 +167,10 @@ public:
         street = new QVBoxLayout(verticalLayoutWidget);
         street->setObjectName("street");
         street->setContentsMargins(0, 0, 0, 0);
-        label_8 = new QLabel(verticalLayoutWidget);
-        label_8->setObjectName("label_8");
+        label_street = new QLabel(verticalLayoutWidget);
+        label_street->setObjectName("label_street");
 
-        street->addWidget(label_8);
+        street->addWidget(label_street);
 
         lineEdit_companyAddrStreet = new QLineEdit(verticalLayoutWidget);
         lineEdit_companyAddrStreet->setObjectName("lineEdit_companyAddrStreet");
@@ -183,10 +183,10 @@ public:
         cityState = new QGridLayout(gridLayoutWidget);
         cityState->setObjectName("cityState");
         cityState->setContentsMargins(0, 0, 0, 0);
-        label_9 = new QLabel(gridLayoutWidget);
-        label_9->setObjectName("label_9");
+        label_city = new QLabel(gridLayoutWidget);
+        label_city->setObjectName("label_city");
 
-        cityState->addWidget(label_9, 0, 0, 1, 1);
+        cityState->addWidget(label_city, 0, 0, 1, 1);
 
         lineEdit_companyAddrCity = new QLineEdit(gridLayoutWidget);
         lineEdit_companyAddrCity->setObjectName("lineEdit_companyAddrCity");
@@ -194,10 +194,10 @@ public:
 
         cityState->addWidget(lineEdit_companyAddrCity, 1, 0, 1, 1);
 
-        label_10 = new QLabel(gridLayoutWidget);
-        label_10->setObjectName("label_10");
+        label_state = new QLabel(gridLayoutWidget);
+        label_state->setObjectName("label_state");
 
-        cityState->addWidget(label_10, 0, 1, 1, 1);
+        cityState->addWidget(label_state, 0, 1, 1, 1);
 
         lineEdit_companyAddrState = new QLineEdit(gridLayoutWidget);
         lineEdit_companyAddrState->setObjectName("lineEdit_companyAddrState");
@@ -223,15 +223,15 @@ public:
 
         zipCountry->addWidget(lineEdit_companyAddrCountry, 1, 1, 1, 1);
 
-        label_7 = new QLabel(gridLayoutWidget_2);
-        label_7->setObjectName("label_7");
+        label_zip = new QLabel(gridLayoutWidget_2);
+        label_zip->setObjectName("label_zip");
 
-        zipCountry->addWidget(label_7, 0, 0, 1, 1);
+        zipCountry->addWidget(label_zip, 0, 0, 1, 1);
 
-        label_11 = new QLabel(gridLayoutWidget_2);
-        label_11->setObjectName("label_11");
+        label_country = new QLabel(gridLayoutWidget_2);
+        label_country->setObjectName("label_country");
 
-        zipCountry->addWidget(label_11, 0, 1, 1, 1);
+        zipCountry->addWidget(label_country, 0, 1, 1, 1);
 
         label_info = new QLabel(CompanyInfoDialog);
         label_info->setObjectName("label_info");
@@ -247,20 +247,20 @@ public:
     void retranslateUi(QDialog *CompanyInfoDialog)
     {
         CompanyInfoDialog->setWindowTitle(QCoreApplication::translate("CompanyInfoDialog", "Company Information", nullptr));
-        label->setText(QCoreApplication::translate("CompanyInfoDialog", "Company Name: ", nullptr));
-        label_2->setText(QCoreApplication::translate("CompanyInfoDialog", "Telephone Number: ", nullptr));
+        label_cName->setText(QCoreApplication::translate("CompanyInfoDialog", "Company Name: ", nullptr));
+        label_number->setText(QCoreApplication::translate("CompanyInfoDialog", "Telephone Number: ", nullptr));
         label_5->setText(QCoreApplication::translate("CompanyInfoDialog", " (", nullptr));
         label_4->setText(QCoreApplication::translate("CompanyInfoDialog", ") ", nullptr));
         label_3->setText(QCoreApplication::translate("CompanyInfoDialog", "-", nullptr));
-        label_6->setText(QCoreApplication::translate("CompanyInfoDialog", "Website Address: ", nullptr));
+        label_url->setText(QCoreApplication::translate("CompanyInfoDialog", "Website Address: ", nullptr));
         label_addr->setText(QCoreApplication::translate("CompanyInfoDialog", "Address:", nullptr));
-        label_8->setText(QCoreApplication::translate("CompanyInfoDialog", "Street:", nullptr));
-        label_9->setText(QCoreApplication::translate("CompanyInfoDialog", "City:", nullptr));
-        label_10->setText(QCoreApplication::translate("CompanyInfoDialog", "State Code", nullptr));
+        label_street->setText(QCoreApplication::translate("CompanyInfoDialog", "Street:", nullptr));
+        label_city->setText(QCoreApplication::translate("CompanyInfoDialog", "City:", nullptr));
+        label_state->setText(QCoreApplication::translate("CompanyInfoDialog", "State Code", nullptr));
         lineEdit_companyAddrZip->setText(QString());
         lineEdit_companyAddrCountry->setText(QCoreApplication::translate("CompanyInfoDialog", "United States", nullptr));
-        label_7->setText(QCoreApplication::translate("CompanyInfoDialog", "Zip Code", nullptr));
-        label_11->setText(QCoreApplication::translate("CompanyInfoDialog", "Country", nullptr));
+        label_zip->setText(QCoreApplication::translate("CompanyInfoDialog", "Zip Code", nullptr));
+        label_country->setText(QCoreApplication::translate("CompanyInfoDialog", "Country", nullptr));
         label_info->setText(QCoreApplication::translate("CompanyInfoDialog", "Company Info:", nullptr));
     } // retranslateUi
 

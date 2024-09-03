@@ -22,6 +22,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void refreshCompanyData();
+
 private slots:
     void on_actionExport_Company_Data_triggered();
 };

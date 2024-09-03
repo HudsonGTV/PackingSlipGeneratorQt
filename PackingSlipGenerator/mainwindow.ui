@@ -10,6 +10,12 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Packing Slip Generator</string>
   </property>
@@ -23,7 +29,161 @@
       <height>551</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout"/>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_companyData">
+       <property name="font">
+        <font>
+         <family>Consolas</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>Import Company Data Before Generating Label (File -&gt; Import Company Data)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="gridLayout_customer">
+       <property name="sizeConstraint">
+        <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+       </property>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>SHIP TO:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>SOLD TO:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="lineEdit_orderID">
+         <property name="placeholderText">
+          <string>Order Number(s)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_cityStateZip">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_cCity">
+           <property name="placeholderText">
+            <string>Cityville</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_cState">
+           <property name="placeholderText">
+            <string>WA</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_cZip">
+           <property name="placeholderText">
+            <string>12345</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Purchase Order(s):</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLineEdit" name="lineEdit_cNumber">
+         <property name="placeholderText">
+          <string>555-555-5555</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLineEdit" name="lineEdit_cName">
+         <property name="placeholderText">
+          <string>John Doe</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="lineEdit_cCountry">
+         <property name="placeholderText">
+          <string>United States</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Date:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_cStreet">
+         <property name="placeholderText">
+          <string>1234 Streetname Blvd</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QDateEdit" name="dateEdit">
+         <property name="displayFormat">
+          <string>MMMM dd, yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="timeSpec">
+          <enum>Qt::TimeSpec::LocalTime</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_orderData">
+       <property name="font">
+        <font>
+         <family>Consolas</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>Order List</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -41,6 +201,7 @@
     </property>
     <addaction name="actionImport_Company_Data"/>
     <addaction name="actionExport_Company_Data"/>
+    <addaction name="actionPrint_Packing_Slip"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -55,7 +216,23 @@
     <string>Generate Company Data</string>
    </property>
   </action>
+  <action name="actionPrint_Packing_Slip">
+   <property name="text">
+    <string>Print Packing Slip</string>
+   </property>
+  </action>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_cName</tabstop>
+  <tabstop>lineEdit_cNumber</tabstop>
+  <tabstop>lineEdit_cStreet</tabstop>
+  <tabstop>lineEdit_cCity</tabstop>
+  <tabstop>lineEdit_cState</tabstop>
+  <tabstop>lineEdit_cZip</tabstop>
+  <tabstop>lineEdit_cCountry</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>lineEdit_orderID</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
