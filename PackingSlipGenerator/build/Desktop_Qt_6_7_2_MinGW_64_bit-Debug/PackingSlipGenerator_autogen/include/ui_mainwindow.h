@@ -20,7 +20,8 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -31,7 +32,10 @@ class Ui_MainWindow
 public:
     QAction *actionImport_Company_Data;
     QAction *actionExport_Company_Data;
+    QAction *actionPrint_Packing_Slip;
     QWidget *centralwidget;
+    QTabWidget *tabWidget;
+    QWidget *tabMain;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QLabel *label_companyData;
@@ -50,10 +54,12 @@ public:
     QLabel *label_4;
     QLineEdit *lineEdit_cStreet;
     QDateEdit *dateEdit;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents_2;
     QLabel *label_orderData;
+    QWidget *tabItemEditor;
     QMenuBar *menubar;
     QMenu *menuFile;
-    QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -65,20 +71,34 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
+        MainWindow->setMinimumSize(QSize(800, 600));
+        MainWindow->setMaximumSize(QSize(800, 600));
         actionImport_Company_Data = new QAction(MainWindow);
         actionImport_Company_Data->setObjectName("actionImport_Company_Data");
         actionExport_Company_Data = new QAction(MainWindow);
         actionExport_Company_Data->setObjectName("actionExport_Company_Data");
+        actionPrint_Packing_Slip = new QAction(MainWindow);
+        actionPrint_Packing_Slip->setObjectName("actionPrint_Packing_Slip");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        verticalLayoutWidget = new QWidget(centralwidget);
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName("tabWidget");
+        tabWidget->setGeometry(QRect(0, 0, 801, 581));
+        tabMain = new QWidget();
+        tabMain->setObjectName("tabMain");
+        verticalLayoutWidget = new QWidget(tabMain);
         verticalLayoutWidget->setObjectName("verticalLayoutWidget");
-        verticalLayoutWidget->setGeometry(QRect(0, 0, 801, 551));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 771, 531));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout->setSpacing(10);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         label_companyData = new QLabel(verticalLayoutWidget);
         label_companyData->setObjectName("label_companyData");
+        label_companyData->setMinimumSize(QSize(0, 150));
+        QFont font;
+        font.setFamilies({QString::fromUtf8("Consolas")});
+        label_companyData->setFont(font);
         label_companyData->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
 
         verticalLayout->addWidget(label_companyData);
@@ -167,12 +187,33 @@ public:
 
         verticalLayout->addLayout(gridLayout_customer);
 
-        label_orderData = new QLabel(verticalLayoutWidget);
+        scrollArea = new QScrollArea(verticalLayoutWidget);
+        scrollArea->setObjectName("scrollArea");
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Ignored, QSizePolicy::Policy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(scrollArea->sizePolicy().hasHeightForWidth());
+        scrollArea->setSizePolicy(sizePolicy2);
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName("scrollAreaWidgetContents_2");
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 767, 194));
+        label_orderData = new QLabel(scrollAreaWidgetContents_2);
         label_orderData->setObjectName("label_orderData");
+        label_orderData->setGeometry(QRect(0, 0, 799, 181));
+        label_orderData->setFont(font);
+        label_orderData->setCursor(QCursor(Qt::CursorShape::IBeamCursor));
+        label_orderData->setScaledContents(false);
         label_orderData->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
+        label_orderData->setTextInteractionFlags(Qt::TextInteractionFlag::LinksAccessibleByMouse|Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse);
+        scrollArea->setWidget(scrollAreaWidgetContents_2);
 
-        verticalLayout->addWidget(label_orderData);
+        verticalLayout->addWidget(scrollArea);
 
+        tabWidget->addTab(tabMain, QString());
+        tabItemEditor = new QWidget();
+        tabItemEditor->setObjectName("tabItemEditor");
+        tabWidget->addTab(tabItemEditor, QString());
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -180,9 +221,6 @@ public:
         menuFile = new QMenu(menubar);
         menuFile->setObjectName("menuFile");
         MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName("statusbar");
-        MainWindow->setStatusBar(statusbar);
         QWidget::setTabOrder(lineEdit_cName, lineEdit_cNumber);
         QWidget::setTabOrder(lineEdit_cNumber, lineEdit_cStreet);
         QWidget::setTabOrder(lineEdit_cStreet, lineEdit_cCity);
@@ -195,8 +233,12 @@ public:
         menubar->addAction(menuFile->menuAction());
         menuFile->addAction(actionImport_Company_Data);
         menuFile->addAction(actionExport_Company_Data);
+        menuFile->addAction(actionPrint_Packing_Slip);
 
         retranslateUi(MainWindow);
+
+        tabWidget->setCurrentIndex(0);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -206,6 +248,7 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Packing Slip Generator", nullptr));
         actionImport_Company_Data->setText(QCoreApplication::translate("MainWindow", "Import Company Data", nullptr));
         actionExport_Company_Data->setText(QCoreApplication::translate("MainWindow", "Generate Company Data", nullptr));
+        actionPrint_Packing_Slip->setText(QCoreApplication::translate("MainWindow", "Print Packing Slip", nullptr));
         label_companyData->setText(QCoreApplication::translate("MainWindow", "Import Company Data Before Generating Label (File -> Import Company Data)", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "SHIP TO:", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "SOLD TO:", nullptr));
@@ -220,7 +263,14 @@ public:
         label_4->setText(QCoreApplication::translate("MainWindow", "Date:", nullptr));
         lineEdit_cStreet->setPlaceholderText(QCoreApplication::translate("MainWindow", "1234 Streetname Blvd", nullptr));
         dateEdit->setDisplayFormat(QCoreApplication::translate("MainWindow", "MMMM dd, yyyy", nullptr));
-        label_orderData->setText(QCoreApplication::translate("MainWindow", "Order List", nullptr));
+        label_orderData->setText(QCoreApplication::translate("MainWindow", "Order List\n"
+"Example Data Until Complete\n"
+"QTY         ITEM\n"
+"1           itemOne\n"
+"\n"
+"            item attribute", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tabMain), QCoreApplication::translate("MainWindow", "Overview", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tabItemEditor), QCoreApplication::translate("MainWindow", "Item Editor", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 

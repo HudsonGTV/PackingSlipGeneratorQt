@@ -16,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
 
+    // make tab the main widget
+    this->setCentralWidget(ui->tabWidget);
+
     // Set date field to current date
     ui->dateEdit->setDate(QDate::currentDate());
 
